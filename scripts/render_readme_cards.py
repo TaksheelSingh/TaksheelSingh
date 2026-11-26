@@ -27,7 +27,7 @@ ROOT = os.path.join(HERE, "..")
 DATA = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "cards")
 FONTS = os.path.join(ROOT, "fonts")
-PORTRAIT = os.path.join(ROOT, "avi-ascii.svg")
+PORTRAIT = os.path.join(ROOT, "taksheel-ascii.svg")
 
 # ---- hand-set numbers (update from avivashishta.com data/stats.json) --------
 REEL_VIEWS = "12.7M"
@@ -152,6 +152,16 @@ def text_lines(x, y, lines, lh, attrs):
 # ---- 1 · hero -----------------------------------------------------------------
 def hero():
     h = 420
+    src = open(PORTRAIT).read()
+    rows = re.findall(r'<text xml:space="preserve"[^>]*\by="([\d.]+)"[^>]*>(.*?)</text>', src, re.S)
+    portrait = []
+    for i, (y, txt) in enumerate(rows):
+        portrait.append(
+            f'<text class="f" style="animation-delay:{0.25 + i * 0.018:.3f}s;animation-duration:.35s" '
+            f'xml:space="preserve" x="20" y="{y}" fill="{INK}" font-size="7.2" '
+            f'textLength="800" lengthAdjust="spacing">{txt}</text>'
+        )
+    s = 0.41
     body = f"""
 <defs>
   <linearGradient id="shine" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="600" y2="0">
@@ -167,14 +177,17 @@ def hero():
   <rect class="live" x="48" y="49" width="8" height="8" rx="2" fill="{TECH}"/>
   <text x="66" y="57" font-family="{MONO}" font-size="12" letter-spacing="1" fill="{MUTED}">DEVOPS &amp; AI/ML ENGINEER AT DISHTV</text>
 </g>
-<text class="r" {d(0.15)} x="48" y="180" font-family="{SERIF}" font-size="110" letter-spacing="-2.5" fill="{INK}">Taksheel</text>
-<text class="r" {d(0.3)} x="48" y="275" font-family="{SERIF}" font-style="italic" font-size="110" letter-spacing="-2.5" fill="url(#shine)">Singh Rawat</text>
+<text class="r" {d(0.15)} x="48" y="190" font-family="{SERIF}" font-size="110" letter-spacing="-2.5" fill="{INK}">Taksheel</text>
+<text class="r" {d(0.3)} x="48" y="285" font-family="{SERIF}" font-style="italic" font-size="110" letter-spacing="-2.5" fill="url(#shine)">Singh Rawat</text>
 <g class="r" {d(0.55)}>
-  {text_lines(48, 328, ["Bridging backend development, cloud automation,", "and emerging AI technologies."], 27, f'font-family="{SANS}" font-size="18" fill="{INK_SOFT}"')}
+  {text_lines(48, 335, ["Bridging backend development, cloud automation,", "and emerging AI technologies."], 27, f'font-family="{SANS}" font-size="18" fill="{INK_SOFT}"')}
 </g>
 <g class="f" {d(0.8)}>
-  <text x="48" y="388" font-family="{MONO}" font-size="13" fill="{INK}">TaksheelSingh-portfolio</text>
-  <text class="nu" x="236" y="388" font-family="{MONO}" font-size="13" fill="{TECH}">&#8599;</text>
+  <text x="48" y="396" font-family="{MONO}" font-size="13" fill="{INK}">TaksheelSingh-portfolio</text>
+  <text class="nu" x="236" y="396" font-family="{MONO}" font-size="13" fill="{TECH}">&#8599;</text>
+</g>
+<g transform="translate(520 46) scale({s}) translate(-20 -37)" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  {''.join(portrait)}
 </g>
 """
     write("hero.svg", svg(W, h, body, ["serif", "serif-i", "sans", "mono"],
