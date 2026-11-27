@@ -2,16 +2,15 @@
 """
 Render the profile README's cards as animated SVGs into cards/.
 
-Design: "Three Worlds", matched to avivashishta.com (paper, ink, and one colour per
-world: BUILD blue, BRAND red, LEARN yellow; Instrument Serif, Geist, Geist Mono).
+Design: "Three Worlds", customized for Taksheel Singh Rawat (paper, ink, and
+one colour per world: BUILD blue, BRAND red, LEARN yellow; Instrument Serif,
+Geist, Geist Mono).
 
 Every card is a standalone SVG shown through <img>, so it can only use what GitHub
 allows there: inline CSS animations, SMIL and fonts embedded as data URIs (no JS,
 no external requests). Fonts are subset WOFFs in fonts/ (SIL OFL).
 
-Live numbers come from data/contributions.json (fetch_contributions.py). The
-brand and blog numbers are set by hand below; they come from data/stats.json in
-the avivashishta.com repo.
+Live numbers come from data/contributions.json (fetch_contributions.py).
 
 Run by .github/workflows/update-profile-art.yml after fetch_contributions.py.
 """
@@ -28,10 +27,6 @@ DATA = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "cards")
 FONTS = os.path.join(ROOT, "fonts")
 PORTRAIT = os.path.join(ROOT, "taksheel-ascii.svg")
-
-# ---- hand-set numbers (update from avivashishta.com data/stats.json) --------
-REEL_VIEWS = "12.7M"
-BLOG_READERS = "27.5K"
 
 # ---- brand tokens -----------------------------------------------------------
 PAPER = "#f3f3f1"

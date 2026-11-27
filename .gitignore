@@ -1,0 +1,22 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments & secrets
+.env
+.env.*
+.venv/
+env/
+venv/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Architectural & decision reports quarantine (GEMINI.md Rule 6.5)
+decision-reports/
+*decision-report*.md
+*DECISION*.md
